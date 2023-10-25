@@ -6,9 +6,9 @@ const socketapi = {
 // Add your socket.io logic here!
 io.on( "connection", function( socket ) {
     console.log( "A user connected" );
-   socket.on('message',(msg)=>{
-    console.log(msg);
-    io.emit('message','Hello from server')
+   socket.on('connectToRoom',(room)=>{
+    socket.join(room)
+    socket.broadcast.to(room).emit('max',`User connected ${room}`)
    })
 });
 // end of socket.io logic

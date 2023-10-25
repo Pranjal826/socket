@@ -5,24 +5,31 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-  
+  <div class="chat-container">
+    <div class="incoming-msg">
 
-    <input type="text" class="msg">
-    <button>Send</button>
+    </div>
+    <div class="outgoing-msg">
+
+    </div>
+    <div class="input">
+      <input type="text" placeholder="Enter message">
+      <button>Send</button>
+    </div>
+    
+   
+  </div>
 
     
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
-        var msg=document.querySelector('input').value
-        document.querySelector('button').addEventListener('click', function(e){
-          const msg=document.querySelector('input').value
-          socket.emit('message', msg);
-          });
-          socket.on('message', (data) => {
-            console.log(data);
-          })
+      const roomName=prompt("Enter roomname")
+      socket.emit('connectToRoom',roomName)
+      socket.on('max',(msg)=>{
+        console.log(msg)
+      })
 
     </script>
   </body>
