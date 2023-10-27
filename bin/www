@@ -5,9 +5,10 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('socket:server');
+var debug = require('debug')('mern7:server');
 var http = require('http');
 let socketapi = require("../socketapi");
+
 /**
  * Get port from environment and store in Express.
  */
@@ -21,6 +22,7 @@ app.set('port', port);
 
 var server = http.createServer(app);
 socketapi.io.attach(server);
+
 /**
  * Listen on provided port, on all network interfaces.
  */

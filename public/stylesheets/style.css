@@ -1,32 +1,8 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body,html {
-  
-  height: 100%;
+body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.chat-container{
-  height: 100%;
-  display: flex;
-  background-color: aquamarine;
-  flex-direction: column;
-  align-items: center;
-}
-.incoming-msg{
-  margin-bottom: 20px;
-  width: 100px;
-
-}
-.outgoing-msg{
-  text-align: right;
-  width: 100px;
-}
-.input{
- width: 100%;
- 
+a {
+  color: #00B7FF;
 }

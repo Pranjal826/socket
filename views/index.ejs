@@ -1,36 +1,142 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-  <div class="chat-container">
-    <div class="incoming-msg">
+<html lang="en">
 
-    </div>
-    <div class="outgoing-msg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0%;
+      padding: 0%;
+      box-sizing: border-box;
+    }
 
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+    }
+
+    #main {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .conversationArea {
+      height: 70vh;
+      width: 60vw;
+      background-color: red;
+    }
+
+    .messages {
+      width: 100%;
+      height: calc(100% - 32px);
+      background-color: green;
+      padding: 5px;
+    }
+
+    .messages .msg {
+      background-color: #fff;
+      width: fit-content;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .outgoingMessage {
+      margin-left: auto;
+    }
+
+    .msg .username {
+      font-size: 10px;
+      opacity: 0.7;
+    }
+
+
+    .inputs {
+      display: flex;
+      width: 100%;
+    }
+
+    .inputs input {
+      width: 100%;
+    }
+
+    .inputs input,
+    .inputs button {
+      height: 32px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <div class="conversationArea">
+      <div class="messages">
+
+        <div class="msg incomingMessage">
+          <div class="username">username</div>
+          <div class="data"> hello hi hello </div>
+        </div>
+        <div class="msg outgoingMessage">
+          <div class="username">you</div>
+          <div class="data"> hello hi hello </div>
+        </div>
+
+
+      </div>
+      <div class="inputs">
+        <input type="text" placeholder="Enter message">
+        <button onclick="sendMessage()">send</button>
+      </div>
     </div>
-    <div class="input">
-      <input type="text" placeholder="Enter message">
-      <button>Send</button>
-    </div>
-    
-   
   </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
 
-    
+    const username = prompt('Enter username')
+    console.log(username)
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io();
-      const roomName=prompt("Enter roomname")
-      socket.emit('connectToRoom',roomName)
-      socket.on('max',(msg)=>{
-        console.log(msg)
-      })
+    /* 
+    msg = {
+      username:'shubham',
+      msg:'hello hi hello hi'
+    }
+     */
 
-    </script>
-  </body>
+    function incomingMessage(messagePacket) {
+      document.querySelector('.messages').innerHTML += ` <div class="msg incomingMessage">
+          <div class="username">${messagePacket.username}</div>
+          <div class="data"> ${messagePacket.msg} </div>
+        </div>`
+    }
+
+    function outgoingMessage(msg) {
+      document.querySelector('.messages').innerHTML += ` <div class="msg outgoingMessage">
+          <div class="username">you</div>
+          <div class="data"> ${msg} </div>
+        </div>`
+
+    }
+
+
+    function sendMessage() {
+      const msg = document.querySelector('input').value
+
+      const messagePacket = {
+        username: username,
+        msg: msg
+      }
+
+      outgoingMessage(msg)
+
+    }
+  </script>
+</body>
+
 </html>

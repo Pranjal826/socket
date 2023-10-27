@@ -1,15 +1,11 @@
-const io = require( "socket.io" )();
+const io = require("socket.io")();
 const socketapi = {
     io: io
 };
 
 // Add your socket.io logic here!
-io.on( "connection", function( socket ) {
-    console.log( "A user connected" );
-   socket.on('connectToRoom',(room)=>{
-    socket.join(room)
-    socket.broadcast.to(room).emit('max',`User connected ${room}`)
-   })
+io.on("connection", function (socket) {
+    console.log("A user connected");
 });
 // end of socket.io logic
 
