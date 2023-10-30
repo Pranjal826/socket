@@ -92,6 +92,7 @@
       <div class="inputs">
         <input type="text" placeholder="Enter message">
         <button onclick="sendMessage()">send</button>
+        
       </div>
     </div>
   </div>
@@ -128,10 +129,10 @@
     function sendMessage() {
       const msg = document.querySelector('input').value
 
-      const messagePacket = {
-        username: username,
-        msg: msg
-      }
+      // const messagePacket = {
+      //   username: username,
+      //   msg: msg
+      // }
 
       outgoingMessage(msg)
 
